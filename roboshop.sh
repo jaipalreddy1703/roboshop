@@ -27,4 +27,7 @@ do
             --query 'Reservations[].Instances[].PrivateAddress' \
             --output text
         )
+    fi
+
+    echo "IP Add: $IP"
 done
