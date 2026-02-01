@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 SG_ID="sg-005f466126c3865b6"
 AMI_ID="ami-0220d79f3f480ecf5"
@@ -12,8 +12,8 @@ do
     --tag-specifications  "ResourceType=instance,Tags[{Key=Name,Value=$instance}]" \
     --query 'Instances[0].InstanceId' \
     --output text)
-    
-    if[$instance=="frontend"]; then
+
+    if[ $instance=="frontend" ]; then
         IP=$(
             aws ec2 describe-instances \
             --instance-ids $instance_id \
