@@ -23,12 +23,14 @@ do
       --query 'Reservations[].Instances[].PublicIpAddress' \
       --output text
     )
+    RECORD_NAME="$DOMAIN_NAME" # vakiti.online
   else
     IP=$(aws ec2 describe-instances \
       --instance-ids "$INSTANCE_ID" \
       --query 'Reservations[].Instances[].PrivateIpAddress' \
       --output text
     )
+    RECORD_NAME="$instance.$DOMAIN_NAME"
   fi
 
   echo "IP Address: $IP"
@@ -40,9 +42,9 @@ do
       \"Changes\": [{
         \"Action\": \"UPSERT\",
         \"ResourceRecordSet\": {
-          \"Name\": \"$instance.$DOMAIN_NAME\",
+          \"Name\": \"$DOMAIN_NAME\",
           \"Type\": \"A\",
-          \"TTL\": 60,
+          \"TTL\": 1,
           \"ResourceRecords\": [{ \"Value\": \"$IP\" }]
         }
       }]
