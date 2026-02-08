@@ -3,10 +3,10 @@ Description=Shipping Service
 
 [Service]
 User=roboshop
-
-Environment=CART_ENDPOINT=cart.vakiti.online:8080
 Environment=DB_HOST=mysql.vakiti.online
-
+Environment=DB_USER=shipping
+Environment=DB_PASSWORD=RoboShop@1
+Environment=DB_NAME=cities
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
 
