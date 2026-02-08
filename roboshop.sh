@@ -14,7 +14,7 @@ do
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
     --security-group-ids "$SG_id" \
     --query 'Instances[0].InstanceId' \
-    --output text \)
+    --output text)
 
     if [ $? -ne 0 ]; then
         echo "Failed to launch instance $instance."
@@ -44,4 +44,3 @@ do
     echo " $instance is up and running on IP: $IP"
 
 done
-
