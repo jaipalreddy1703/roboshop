@@ -24,20 +24,13 @@ VALIDATE(){
     fi
 }
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-VALIDATE $? "Copying Mongo Repo" 
+dnf install mysql-server -y &>>$LOGS_FILE
+VALIDATE $? "Install MySQL server"
 
-dnf install mongodb-org -y &>>$LOGS_FILE
-VALIDATE $? "Installing MongoDB server"
+systemctl enable mysqld &>>$LOGS_FILE
+systemctl start mysqld  
+VALIDATE $? "Enable and start mysql"
 
-systemctl enable mongod &>>$LOGS_FILE
-VALIDATE $? "Enable MongoDB"
-
-systemctl start mongod
-VALIDATE $? "Start MongoDB"
-
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-VALIDATE $? "Allowing remote connections"
-
-systemctl restart mongod
-VALIDATE $? "Restarted MongoDB"
+# get the password from user
+mysql_secure_installation --set-root-pass RoboShop@1
+VALIDATE $? "Setup root password"

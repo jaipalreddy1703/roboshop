@@ -1,12 +1,9 @@
 #!/bin/bash
 
-echo "*********Running roboshop sh*************"
-
+SG_ID="sg-076ec9ad23dab2b28" # replace with your ID
 AMI_ID="ami-0220d79f3f480ecf5"
-SG_ID="sg-005f466126c3865b6"
-DOMAIN_NAME="vakiti.online"
-ZONE_ID="Z00087883QCEFVVFLOJWL"
-
+ZONE_ID="Z05013202FKF0ZL12WAOP"
+DOMAIN_NAME="daws88s.online"
 
 for instance in $@
 do
