@@ -12,7 +12,7 @@ do
     --image-id "$AMI_ID" \
     --instance-type "t3.micro" \
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
-    --security-group-ids "$SG_id" \
+    --security-group-ids "$SG_ID" \
     --query 'Instances[0].InstanceId' \
     --output text)
 
@@ -39,7 +39,8 @@ do
         IP=$(aws ec2 describe-instances \
         --instance-ids "$INSTANCE_ID" \
         --query 'Reservations[0].Instances[0].PublicIpAddress' \
-        --output text)        
+        --output text)     
+    fi   
 
     echo " Instance for $instance is up and running on IP: $IP"
 done
