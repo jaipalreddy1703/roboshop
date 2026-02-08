@@ -42,5 +42,3 @@ do
         --output text)        
 
     echo " $instance is up and running on IP: $IP"
-
-done
