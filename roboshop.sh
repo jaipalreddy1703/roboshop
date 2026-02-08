@@ -34,12 +34,12 @@ do
         IP=$(aws ec2 describe-instances \
         --instance-ids "$INSTANCE_ID" \
         --query 'Reservations[0].Instances[0].PrivateIpAddress' \
-        --output text \)
+        --output text)
     else
         IP=$(aws ec2 describe-instances \
         --instance-ids "$INSTANCE_ID" \
         --query 'Reservations[0].Instances[0].PublicIpAddress' \
-        --output text \)        
+        --output text)        
 
     echo " $instance is up and running on IP: $IP"
 
