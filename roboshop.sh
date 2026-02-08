@@ -4,6 +4,9 @@ echo "*********Running roboshop sh*************"
 
 AMI_ID="ami-0220d79f3f480ecf5"
 SG_ID="sg-005f466126c3865b6"
+DOMAIN_NAME="vakiti.online"
+ZONE_ID="Z00087883QCEFVVFLOJWL"
+
 
 for instance in $@
 do 
@@ -42,5 +45,24 @@ do
         --output text)     
     fi   
 
-    echo " Instance for $instance is up and running on IP: $IP"
+    echo "Instance for $instance is up and running on IP: $IP"
+
+
+        # ===== CREATE / UPDATE ROUTE53 RECORD =====
+    aws route53 change-resource-record-sets \
+        --hosted-zone-id "$ZONE_ID" \
+        --change-batch "{
+            \"Changes\": [{
+                \"Action\": \"UPSERT\",
+                \"ResourceRecordSet\": {
+                    \"Name\": \"${instance}.${DOMAIN_NAME}\",
+                    \"Type\": \"A\",
+                    \"TTL\": 1,
+                    \"ResourceRecords\": [{\"Value\": \"$IP\"}]
+                }
+            }]
+        }"
+
+    echo "DNS record created: ${instance}.${DOMAIN_NAME} → $IP"
+
 done
