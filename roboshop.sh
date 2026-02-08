@@ -27,7 +27,7 @@ do
     aws ec2 wait instance-running \
     --instance-ids "$INSTANCE_ID" \
     --region "us-east-1"
-    echo "$instance is running.."
+    echo "Instance of $instance is running.."
 
     # ===== GET PUBLIC IP =====
     if [ $instance == "frontend" ]; then 
@@ -41,5 +41,5 @@ do
         --query 'Reservations[0].Instances[0].PublicIpAddress' \
         --output text)        
 
-    echo " $instance is up and running on IP: $IP"
-    
+    echo " Instance for $instance is up and running on IP: $IP"
+done
